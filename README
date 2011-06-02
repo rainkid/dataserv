@@ -1,0 +1,10 @@
+this is create data project write by php extension
+steps:
+1.download php source code
+2.git clone git@github.com:dataserv/dataserv.git dataserv
+2.cp -rf dataserv ext/dataserv
+3.sh mkso.sh
+4.find php.ini add something follow 
+	extension=dataserv.so
+5.edit dataserv.php you need.
+6.php -f dataserv.php.
