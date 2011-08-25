@@ -8,5 +8,5 @@ echo "-----------------    make  ---------------\n\n"
 make
 echo "-----------------make install---------------\n\n"
 make install
-echo "-----------------apache restart-------------\n\n"
-/etc/init.d/apache2 restart
+#echo "-----------------apache restart-------------\n\n"
+#/etc/init.d/apache2 restart

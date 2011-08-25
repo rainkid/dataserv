@@ -2420,13 +2420,13 @@ EOF
   for arg in $ac_configure_args; do
      if test `expr -- $arg : "'.*"` = 0; then
         if test `expr -- $arg : "--.*"` = 0; then
-       	  break;
+          break;
         fi
         echo "'$arg' \\" >> config.nice
         CONFIGURE_OPTIONS="$CONFIGURE_OPTIONS '$arg'"
      else
         if test `expr -- $arg : "'--.*"` = 0; then
-       	  break;
+          break;
         fi
         echo "$arg \\" >> config.nice
         CONFIGURE_OPTIONS="$CONFIGURE_OPTIONS $arg"
@@ -3364,10 +3364,7 @@ if test "${with_libdir+set}" = set; then :
 else
   
   PHP_LIBDIR=lib
-
-  if test "$PHP_ENABLE_ALL" && test "no" = "yes"; then
-    PHP_LIBDIR=$PHP_ENABLE_ALL
-  fi
+  
 
 fi
 
@@ -3640,10 +3637,7 @@ if test "${with_php_config+set}" = set; then :
 else
   
   PHP_PHP_CONFIG=php-config
-
-  if test "$PHP_ENABLE_ALL" && test "no" = "yes"; then
-    PHP_PHP_CONFIG=$PHP_ENABLE_ALL
-  fi
+  
 
 fi
 
@@ -3763,7 +3757,7 @@ if test "$PHP_DEBUG" = "yes"; then
   
     if test "$GCC" = "yes" || test "$ICC" = "yes"; then
     CFLAGS="$CFLAGS -O0"
-    CXXFLAGS="$CXXFLAGS -O0"
+    CXXFLAGS="$CXXFLAGS -g -O0"
   fi
   if test "$SUNCC" = "yes"; then
     if test -n "$auto_cflags"; then
@@ -3973,10 +3967,7 @@ if test "${enable_dataserv+set}" = set; then :
 else
   
   PHP_DATASERV=no
-
-  if test "$PHP_ENABLE_ALL" && test "yes" = "yes"; then
-    PHP_DATASERV=$PHP_ENABLE_ALL
-  fi
+  test "$PHP_ENABLE_ALL" && PHP_DATASERV=$PHP_ENABLE_ALL
 
 fi
 

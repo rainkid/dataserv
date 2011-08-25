@@ -45,7 +45,7 @@ ZEND_DECLARE_MODULE_GLOBALS(dataserv)*/
 
 /* True global resources - no need for thread safety here */
 static int le_dataserv;
-
+int increment = 0;
 zend_class_entry * data_serv_ce;
 
 PHP_METHOD(dataserv, __construct) {
@@ -131,7 +131,7 @@ static int getfields(zval * fields, char * output){
 				 }
 				 if(strcmp(Z_STRVAL_PP(type), "int") == 0)
 				 {
-					 temp = (char *)emalloc(Z_LVAL_PP(max) * sizeof(int)+2);
+					 temp = (char *)emalloc(Z_LVAL_PP(max) * sizeof(int) + 2);
 					 sprintf(temp, "%ld,", Z_LVAL_PP(min) + rand() % (Z_LVAL_PP(max) - Z_LVAL_PP(min)));
 					 strcat(output, temp);
 				 }else if(strcmp(Z_STRVAL_PP(type), "string") == 0)
@@ -140,6 +140,20 @@ static int getfields(zval * fields, char * output){
 					 get_rand_str(temp, Z_LVAL_PP(min), Z_LVAL_PP(max));
 					 strcat(output, temp);
 					 strcat(output, ",");
+				 }else if(strcmp(Z_STRVAL_PP(type), "increment") == 0){
+					int minvalue= Z_LVAL_PP(min);
+					int step = Z_LVAL_PP(max);
+					if(increment == 0){
+						increment = (int)minvalue;
+					}
+					if(step == 0){
+						step = 1;
+					}
+					increment+=(int)step;
+					temp = (char *)emalloc(Z_LVAL_PP(max) * sizeof(int) + 2);
+					sprintf(temp, "%d", increment);
+					strcat(output, temp);
+					strcat(output, ",");
 				 }
 				 break;
 			 case IS_STRING:

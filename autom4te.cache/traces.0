@@ -153,8 +153,8 @@ m4trace:configure.in:8: -1- AC_SUBST([EGREP])
 m4trace:configure.in:8: -1- AC_SUBST_TRACE([EGREP])
 m4trace:configure.in:8: -1- m4_pattern_allow([^EGREP$])
 m4trace:configure.in:8: -1- _m4_warn([obsolete], [The macro `LT_AC_PROG_SED' is obsolete.
-You should run autoupdate.], [aclocal.m4:9996: LT_AC_PROG_SED is expanded from...
-aclocal.m4:2632: PHP_CONFIG_NICE is expanded from...
+You should run autoupdate.], [aclocal.m4:10002: LT_AC_PROG_SED is expanded from...
+aclocal.m4:2638: PHP_CONFIG_NICE is expanded from...
 configure.in:8: the top level])
 m4trace:configure.in:8: -1- AC_SUBST([SED])
 m4trace:configure.in:8: -1- AC_SUBST_TRACE([SED])
@@ -283,7 +283,7 @@ m4trace:config.m4:61: -1- AH_OUTPUT([COMPILE_DL_DATASERV], [/* Whether to build 
 @%:@undef COMPILE_DL_DATASERV])
 m4trace:configure.in:150: -1- AC_PROG_LIBTOOL
 m4trace:configure.in:150: -1- _m4_warn([obsolete], [The macro `AC_PROG_LIBTOOL' is obsolete.
-You should run autoupdate.], [aclocal.m4:2979: AC_PROG_LIBTOOL is expanded from...
+You should run autoupdate.], [aclocal.m4:2985: AC_PROG_LIBTOOL is expanded from...
 configure.in:150: the top level])
 m4trace:configure.in:150: -1- LT_INIT
 m4trace:configure.in:150: -1- m4_pattern_forbid([^_?LT_[A-Z_]+$])
