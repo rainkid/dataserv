@@ -46,14 +46,18 @@ ZEND_DECLARE_MODULE_GLOBALS(dataserv)*/
 /* True global resources - no need for thread safety here */
 static int le_dataserv;
 int increment = 0;
+int t_start = 0;
+int t_end = 0;
 zend_class_entry * data_serv_ce;
 
 PHP_METHOD(dataserv, __construct) {
 	php_printf("%s", "starting creat data.\n");
+	t_start = time((time_t*)NULL);
 }
 
 PHP_METHOD(dataserv, __destruct) {
-	php_printf("%s", "data creating completed.\n");
+	t_end = time((time_t*)NULL);
+	php_printf("data creating completed, used %ds\n", (t_end - t_start));
 }
 
 static void get_rand_str( char* buf, int min, int max)
@@ -185,7 +189,6 @@ PHP_METHOD(dataserv, create) {
 
 	zval * self = getThis();
 	zval * z_start, * z_end, * retval;
-
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "zz",  &z_start, &z_end) == FAILURE) {
 		WRONG_PARAM_COUNT;
 	}
@@ -291,7 +294,7 @@ PHP_METHOD(dataserv, insdata) {
 		getfields(fields, output);
 		fprintf(fp,"%s\n",output);
 		efree(output);
-		if(i%5 == 0) printf("has %d insert into the files.\n", i);
+		if(i%100 == 0) printf("has %d insert into the files.\n", i);
 	}
 //	printf("LOAD DATA INFILE '$datadir' INTO TABLE $tablename FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES STARTING BY '\\n';\n");
 	fclose(fp);
@@ -313,23 +316,23 @@ PHP_METHOD(dataserv, loaddata) {
 
 	if (mysql_init(&mysql_conn) == NULL)
 	{
-		(void) printf("Initialization fails.\n");
+		php_printf("Initialization fails.\n");
 		mysql_close(&mysql_conn);
 		return;
 	}
 
 	if (mysql_real_connect(&mysql_conn, host, user, passwd, db, MYSQL_PORT, NULL, 128) == NULL)
 	{
-		(void) printf("Connection fails.\n");
+		php_printf("Connection fails.\n");
 		mysql_close(&mysql_conn);
 		return;
 	}
-
+	php_printf("load data into table '%s'.\n", table);
 	sprintf(SQL,"LOAD DATA LOCAL INFILE '%s.sql' INTO TABLE %s.%s FIELDS TERMINATED BY ',' ENCLOSED BY '\"' LINES STARTING BY '\\n'",table,db,table);
 //	php_printf("%s\n", SQL);
 	if (mysql_query(&mysql_conn, SQL) != 0)
 	{
-		(void) printf("Query fails.\n");
+		php_printf("Query fails.\n");
 		mysql_close(&mysql_conn);
 		return;
 	}
