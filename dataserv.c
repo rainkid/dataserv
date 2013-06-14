@@ -46,8 +46,7 @@ ZEND_DECLARE_MODULE_GLOBALS(dataserv)*/
 /* True global resources - no need for thread safety here */
 static int le_dataserv;
 int increment = 0;
-int t_start = 0;
-int t_end = 0;
+int t_start = 0,t_end = 0;
 zend_class_entry * data_serv_ce;
 
 PHP_METHOD(dataserv, __construct) {
@@ -336,6 +335,8 @@ PHP_METHOD(dataserv, loaddata) {
 		mysql_close(&mysql_conn);
 		return;
 	}
+	mysql_free_result(mysql_result);
+	mysql_close(&mysql_conn);
 }
 /* {{{ dataserv_functions[]
  *

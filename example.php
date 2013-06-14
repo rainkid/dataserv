@@ -28,6 +28,6 @@ $ds->setfields(
           )
 );
 //create data file (start,end)
-$ds->create(1,10000000);
+$ds->create(1,10);
 //load data file into mysql
 $ds->loaddata();
